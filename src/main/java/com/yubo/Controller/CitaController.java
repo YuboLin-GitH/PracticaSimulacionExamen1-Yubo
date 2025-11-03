@@ -28,7 +28,7 @@ public class CitaController {
 
 
     @FXML
-    public Button btVerPaciente, btNuevaCita, btBorrarCita, btModificarCita, btVerCita;
+    public Button btNuevaCita, btBorrarCita, btModificarCita, btVerCita;
 
 
     @FXML
@@ -75,6 +75,7 @@ public class CitaController {
         tfNombre.setDisable(true);
         tfDireccion.setDisable(true);
         tfTelefono.setDisable(true);
+        tfNumeroCita.setDisable(true);
 
         colIdCita.setCellValueFactory(new PropertyValueFactory<>("idCita"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fechaCita"));
@@ -94,10 +95,6 @@ public class CitaController {
     }
 
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-        mostrarDatosPaciente();
-    }
 
     private void mostrarDatosPaciente() {
         tfNombre.setText(paciente.getNombre());
@@ -107,13 +104,11 @@ public class CitaController {
 
     }
 
-
     private void cargarEspecialidades() {
         EspecialidadDAO especialidadDAO = new EspecialidadDAO();
         try {
 
-            especialidadDAO.conectar();
-            List<Especialidad> especialidades = especialidadDAO.obtenerTodas();
+            List<Especialidad> especialidades = especialidadDAO.obtenerEspecialidad();
             if (especialidades.isEmpty()) {
                 AlertUtils.mostrarError("Error al obtener las especialidades");
                 return;
@@ -122,7 +117,7 @@ public class CitaController {
             cbEspecialidad.getItems().addAll(especialidades);
 
             for (Especialidad esp : especialidades) {
-                if ("Cirugía".equals(esp.getNombreEsp())) {
+                if ("Cirugia".equals(esp.getNombreEsp())) {
                     cbEspecialidad.setValue(esp);
                     break;
                 }
@@ -131,21 +126,22 @@ public class CitaController {
 
             AlertUtils.mostrarError("Error：" + e.getMessage());
             e.printStackTrace();
-        } finally {
-            try {
-                especialidadDAO.desconectar();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
+
+
+
     private void enlazarSeleccionDeTabla() {
         tvCitasPaciente.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 citaSeleccionada = newVal;
+
+                tfNumeroCita.setText(String.valueOf(newVal.getIdCita()));
+
                 if (newVal.getFechaCita() != null) {
                     dpFechaCita.setValue(((Date) newVal.getFechaCita()).toLocalDate());
                 }
+
                 for (Especialidad esp : cbEspecialidad.getItems()) {
                     if (esp.getIdEsp() == newVal.getFkIdEsp()) {
                         cbEspecialidad.setValue(esp);
@@ -212,20 +208,37 @@ public class CitaController {
             }
 
 
-            this.paciente = nuevoPaciente;
-            mostrarDatosPaciente();
-
-
             citaDAO.conectar();
             List<Cita> citas = citaDAO.obtenerCitaPorPacienteId(paciente.getIdPaciente());
+
+
+            LocalDate hoy = LocalDate.now();
+            boolean hayCitaHoy = citas.stream().anyMatch(cita -> {
+                java.sql.Date fechaSqlDate = (java.sql.Date) cita.getFechaCita();
+                return fechaSqlDate != null && fechaSqlDate.toLocalDate().equals(hoy);
+            });
+
+            if (hayCitaHoy) {
+                AlertUtils.mostrarInformacion("¡Tienes una cita para hoy!");
+            }
+
+
+
             tvCitasPaciente.setItems(FXCollections.observableArrayList(citas));
             citaDAO.desconectar();
+
+
+
+
 
         } catch (Exception e) {
             AlertUtils.mostrarError("Error al buscar paciente: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+
+
     @FXML
     public void nuevaCita() {
 
@@ -341,6 +354,7 @@ public class CitaController {
 
 
     private void limpiarCajas() {
+        tfNumeroCita.clear();
         dpFechaCita.setValue(null);
         cbEspecialidad.setValue(null);
     }

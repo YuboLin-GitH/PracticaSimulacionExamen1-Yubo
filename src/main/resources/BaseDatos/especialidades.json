@@ -1,0 +1,53 @@
+[
+  {
+    "idEspecialidad": 1,
+    "nombreEspecilidad": "Cirujía"
+
+  },
+  {
+    "idEspecialidad": 2,
+    "nombreEspecilidad": "Neurología"
+
+  },
+  {
+    "idEspecialidad": 3,
+    "nombreEspecilidad": "Nefrología"
+
+  },
+  {
+    "idEspecialidad": 4,
+    "nombreEspecilidad": "Digestivo"
+
+  },
+  {
+    "idEspecialidad": 5,
+    "nombreEspecilidad": "Unidad de dolor"
+
+  },
+  {
+    "idEspecialidad": 6,
+    "nombreEspecilidad": "Neumología"
+
+  },
+  {
+    "idEspecialidad": 7,
+    "nombreEspecilidad": "Cardiología"
+
+  },
+  {
+    "idEspecialidad": 8,
+    "nombreEspecilidad": "Pediatría"
+
+  },
+  {
+    "idEspecialidad": 9,
+    "nombreEspecilidad": "Oftalmología"
+
+  },
+  {
+    "idEspecialidad": 10,
+    "nombreEspecilidad": "Radiología"
+
+  }
+
+]

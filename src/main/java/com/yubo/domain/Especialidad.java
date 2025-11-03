@@ -2,7 +2,7 @@ package com.yubo.domain;
 
 
 public class Especialidad {
-    private int idEsp;
+    private int idEspecialidad;
     private String nombreEsp;
 
 
@@ -10,16 +10,16 @@ public class Especialidad {
     }
 
     public Especialidad(int idEsp, String nombreEsp) {
-        this.idEsp = idEsp;
+        this.idEspecialidad = idEsp;
         this.nombreEsp = nombreEsp;
     }
 
     public int getIdEsp() {
-        return idEsp;
+        return idEspecialidad;
     }
 
-    public void setIdEsp(int idEsp) {
-        this.idEsp = idEsp;
+    public void setIdEsp(int idEspecialidad) {
+        this.idEspecialidad = idEspecialidad;
     }
 
     public String getNombreEsp() {
@@ -30,8 +30,12 @@ public class Especialidad {
         this.nombreEsp = nombreEsp;
     }
 
+
     @Override
     public String toString() {
-        return nombreEsp;
+        return "Especialidad{" +
+                "idEspecialidad=" + idEspecialidad +
+                ", nombreEsp='" + nombreEsp + '\'' +
+                '}';
     }
 }
