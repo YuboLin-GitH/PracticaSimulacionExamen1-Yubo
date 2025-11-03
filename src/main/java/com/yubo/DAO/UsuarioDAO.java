@@ -57,22 +57,6 @@ public class UsuarioDAO {
     }
 
 
-    public Paciente valiadarUsuario(String nombre, String passwordPlano) throws SQLException{
-        String sql = "SELECT * FROM paciente WHERE nombre = ? AND password = ?";
-        String passwordHash = DigestUtils.sha256Hex(passwordPlano);
-
-        try (PreparedStatement sentencia = conexion.prepareStatement(sql)) {
-            sentencia.setString(1, nombre);
-            sentencia.setString(2, passwordHash);
-            ResultSet resultado = sentencia.executeQuery();
-
-            if (resultado.next()) {
-                return resultSetToPaciente(resultado);
-            }
-        return null;
-    }
-
-  }
 
 
 

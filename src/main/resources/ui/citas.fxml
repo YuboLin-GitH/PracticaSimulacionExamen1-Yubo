@@ -62,9 +62,9 @@
             <TextField fx:id="tfNombre" layoutX="197.0" layoutY="90.0" prefHeight="25.0" prefWidth="433.0" promptText="Antonio García López " />
             <TextField fx:id="tfDireccion" layoutX="197.0" layoutY="134.0" prefHeight="25.0" prefWidth="433.0" promptText="C/ Nueva, 2" />
             <TextField fx:id="tfTelefono" layoutX="197.0" layoutY="177.0" promptText="605048521" />
-            <Button fx:id="btVerPaciente" layoutX="449.0" layoutY="39.0" mnemonicParsing="false" onAction="#verCita" prefHeight="42.0" prefWidth="150.0" style="-fx-background-radius: 35;" text="Pulsa la tecla enter" />
+            <Button fx:id="btVerPaciente" layoutX="449.0" layoutY="39.0" mnemonicParsing="false" onAction="#verPaciente" prefHeight="42.0" prefWidth="150.0" style="-fx-background-radius: 35;" text="Pulsa la tecla enter" />
 
-            <Button fx:id="btVerCita" layoutX="82.0" layoutY="223.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="119.0" text="Ver citas paciente" textAlignment="CENTER" />
+            <Button fx:id="btVerCita" layoutX="82.0" layoutY="223.0" mnemonicParsing="false" onAction="#verCita"  prefHeight="35.0" prefWidth="119.0" text="Ver citas paciente" textAlignment="CENTER" />
 
             <TextField fx:id="tfNumeroCita" layoutX="320.0" layoutY="288.0" prefHeight="27.0" prefWidth="63.0" />
             <DatePicker fx:id="dpFechaCita" layoutX="307.0" layoutY="343.0" />

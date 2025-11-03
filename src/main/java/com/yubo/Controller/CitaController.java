@@ -24,22 +24,12 @@ import java.util.List;
 
 public class CitaController {
     @FXML
-    public TextField tfTelefono;
-    @FXML
-    public TextField tfNombre;
-    @FXML
-    public TextField tfDireccion;
-    @FXML
-    public TextField tfDNI;
+    public TextField tfTelefono, tfNombre, tfDireccion, tfDNI, tfNumeroCita;
+
 
     @FXML
-    public Button btVerPaciente;
-    @FXML
-    public Button btNuevaCita;
-    @FXML
-    public Button btBorrarCita;
-    @FXML
-    public Button btModificarCita;
+    public Button btVerPaciente, btNuevaCita, btBorrarCita, btModificarCita, btVerCita;
+
 
     @FXML
     public DatePicker dpFechaCita;
@@ -99,7 +89,7 @@ public class CitaController {
     private void manejarEnterParaVerCita(KeyEvent event) {
 
         if (event.getCode() == KeyCode.ENTER) {
-            verCita();
+            verPaciente();
         }
     }
 
@@ -167,6 +157,37 @@ public class CitaController {
     }
 
 
+    @FXML
+    public  void verPaciente(){
+        try {
+            String dniIngresado = tfDNI.getText().trim();
+            if (dniIngresado.isEmpty()) {
+                AlertUtils.mostrarError("Introduce un DNI válido");
+                return;
+            }
+
+
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuarioDAO.conectar();
+            Paciente nuevoPaciente = usuarioDAO.buscarPorDni(dniIngresado);
+            usuarioDAO.desconectar();
+
+            if (nuevoPaciente == null) {
+                AlertUtils.mostrarError("No se encontró paciente con ese DNI");
+                return;
+            }
+
+
+            this.paciente = nuevoPaciente;
+            mostrarDatosPaciente();
+
+
+
+        } catch (Exception e) {
+            AlertUtils.mostrarError("Error al buscar paciente: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void verCita() {
