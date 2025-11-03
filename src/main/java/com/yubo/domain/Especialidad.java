@@ -1,41 +1,43 @@
 package com.yubo.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Especialidad {
+    @JsonProperty("idEspecialidad")
     private int idEspecialidad;
-    private String nombreEsp;
+
+    private String nombreEspecilidad;
 
 
     public Especialidad() {
     }
 
-    public Especialidad(int idEsp, String nombreEsp) {
-        this.idEspecialidad = idEsp;
-        this.nombreEsp = nombreEsp;
+    public Especialidad(int idEspecialidad, String nombreEspecilidad) {
+        this.idEspecialidad = idEspecialidad;
+        this.nombreEspecilidad = nombreEspecilidad;
     }
 
-    public int getIdEsp() {
+
+    public int getIdEspecialidad() {
         return idEspecialidad;
     }
 
-    public void setIdEsp(int idEspecialidad) {
+    public void setIdEspecialidad(int idEspecialidad) {
         this.idEspecialidad = idEspecialidad;
     }
 
-    public String getNombreEsp() {
-        return nombreEsp;
+    public String getNombreEspecilidad() {
+        return nombreEspecilidad;
     }
 
-    public void setNombreEsp(String nombreEsp) {
-        this.nombreEsp = nombreEsp;
+    public void setNombreEspecilidad(String nombreEspecilidad) {
+        this.nombreEspecilidad = nombreEspecilidad;
     }
 
 
     @Override
     public String toString() {
-        return "Especialidad{" +
-                "idEspecialidad=" + idEspecialidad +
-                ", nombreEsp='" + nombreEsp + '\'' +
-                '}';
+        return nombreEspecilidad;
     }
 }

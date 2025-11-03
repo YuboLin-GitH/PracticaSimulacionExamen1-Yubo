@@ -81,9 +81,11 @@ public class CitaController {
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fechaCita"));
         colEspecialidad.setCellValueFactory(new PropertyValueFactory<>("nombreEsp"));
 
+
         cargarEspecialidades();
 
         enlazarSeleccionDeTabla();
+
         tfDNI.setOnKeyPressed(this::manejarEnterParaVerCita);
     }
 
@@ -115,13 +117,14 @@ public class CitaController {
             }
 
             cbEspecialidad.getItems().addAll(especialidades);
+            cbEspecialidad.setValue(null);
 
             for (Especialidad esp : especialidades) {
-                if ("Cirugia".equals(esp.getNombreEsp())) {
                     cbEspecialidad.setValue(esp);
                     break;
-                }
             }
+
+
         } catch (Exception e) {
 
             AlertUtils.mostrarError("Error：" + e.getMessage());
@@ -143,7 +146,7 @@ public class CitaController {
                 }
 
                 for (Especialidad esp : cbEspecialidad.getItems()) {
-                    if (esp.getIdEsp() == newVal.getFkIdEsp()) {
+                    if (esp.getIdEspecialidad() == newVal.getFkIdEsp()) {
                         cbEspecialidad.setValue(esp);
                         break;
                     }
@@ -260,7 +263,7 @@ public class CitaController {
             Cita nuevaCita = new Cita();
             nuevaCita.setIdCita(nuevoId);
             nuevaCita.setFechaCita(Date.valueOf(fechaSeleccionada));
-            nuevaCita.setFkIdEsp(espSeleccionada.getIdEsp());
+            nuevaCita.setFkIdEsp(espSeleccionada.getIdEspecialidad());
             nuevaCita.setFkIdPaciente(paciente.getIdPaciente());
 
 
@@ -301,7 +304,7 @@ public class CitaController {
             Cita citaModificada = new Cita();
             citaModificada.setIdCita(citaSeleccionada.getIdCita());
             citaModificada.setFechaCita(Date.valueOf(fechaModificada));
-            citaModificada.setFkIdEsp(espModificada.getIdEsp());
+            citaModificada.setFkIdEsp(espModificada.getIdEspecialidad());
             citaModificada.setFkIdPaciente(paciente.getIdPaciente());
 
 
