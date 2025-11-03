@@ -33,7 +33,7 @@ public class CitaController {
     public TextField tfDNI;
 
     @FXML
-    public Button btVerCita;
+    public Button btVerPaciente;
     @FXML
     public Button btNuevaCita;
     @FXML
@@ -82,6 +82,9 @@ public class CitaController {
 
     @FXML
     public void initialize() {
+        tfNombre.setDisable(true);
+        tfDireccion.setDisable(true);
+        tfTelefono.setDisable(true);
 
         colIdCita.setCellValueFactory(new PropertyValueFactory<>("idCita"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fechaCita"));
@@ -105,16 +108,13 @@ public class CitaController {
         this.paciente = paciente;
         mostrarDatosPaciente();
     }
+
     private void mostrarDatosPaciente() {
         tfNombre.setText(paciente.getNombre());
         tfDireccion.setText(paciente.getDireccion());
         tfTelefono.setText(String.valueOf(paciente.getTelefono()));
         tfDNI.setText(paciente.getDni());
 
-
-        tfNombre.setDisable(true);
-        tfDireccion.setDisable(true);
-        tfTelefono.setDisable(true);
     }
 
 

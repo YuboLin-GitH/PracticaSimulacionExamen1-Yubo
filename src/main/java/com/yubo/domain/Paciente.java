@@ -1,14 +1,7 @@
 package com.yubo.domain;
 
-/**
- * ClassName: Usuario
- * Package: org.example.practica1medicoyubo.domain
- * Description:
- *
- * @Author Yubo
- * @Create 28/09/2025 16:14
- * @Version 1.0
- */
+
+
 public class Paciente {
     private int idPaciente;
     private String dni;

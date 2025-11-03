@@ -2,15 +2,7 @@ package com.yubo.domain;
 
 import java.util.Date;
 
-/**
- * ClassName: Cita
- * Package: org.example.practica1medicoyubo.domain
- * Description:
- *
- * @Author Yubo
- * @Create 28/09/2025 16:19
- * @Version 1.0
- */
+
 public class Cita  {
     private int idCita;
     private Date fechaCita;
