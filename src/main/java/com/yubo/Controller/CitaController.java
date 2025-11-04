@@ -5,9 +5,10 @@ import com.yubo.DAO.CitaDAO;
 import com.yubo.DAO.EspecialidadDAO;
 import com.yubo.DAO.UsuarioDAO;
 import com.yubo.domain.Cita;
-import com.yubo.domain.Especialidad;
+import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
 import com.yubo.util.AlertUtils;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -35,7 +36,7 @@ public class CitaController {
     public DatePicker dpFechaCita;
 
     @FXML
-    public ComboBox<Especialidad> cbEspecialidad;
+    public ComboBox<Especialidades> cbEspecialidad;
 
     @FXML
     public TableView<Cita> tvCitasPaciente;
@@ -79,13 +80,16 @@ public class CitaController {
 
         colIdCita.setCellValueFactory(new PropertyValueFactory<>("idCita"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fechaCita"));
-        colEspecialidad.setCellValueFactory(new PropertyValueFactory<>("nombreEsp"));
+        colEspecialidad.setCellValueFactory(
+                cellData -> new SimpleStringProperty(
+                        cellData.getValue().getEspecialidad().getNombreEspecialidad())
+        );
 
 
         cargarEspecialidades();
 
         enlazarSeleccionDeTabla();
-
+        limpiarCajas();
         tfDNI.setOnKeyPressed(this::manejarEnterParaVerCita);
     }
 
@@ -110,7 +114,7 @@ public class CitaController {
         EspecialidadDAO especialidadDAO = new EspecialidadDAO();
         try {
 
-            List<Especialidad> especialidades = especialidadDAO.obtenerEspecialidad();
+            List<Especialidades> especialidades = especialidadDAO.obtenerEspecialidad();
             if (especialidades.isEmpty()) {
                 AlertUtils.mostrarError("Error al obtener las especialidades");
                 return;
@@ -119,7 +123,7 @@ public class CitaController {
             cbEspecialidad.getItems().addAll(especialidades);
             cbEspecialidad.setValue(null);
 
-            for (Especialidad esp : especialidades) {
+            for (Especialidades esp : especialidades) {
                     cbEspecialidad.setValue(esp);
                     break;
             }
@@ -142,11 +146,11 @@ public class CitaController {
                 tfNumeroCita.setText(String.valueOf(newVal.getIdCita()));
 
                 if (newVal.getFechaCita() != null) {
-                    dpFechaCita.setValue(((Date) newVal.getFechaCita()).toLocalDate());
+                    dpFechaCita.setValue(newVal.getFechaCita());
                 }
 
-                for (Especialidad esp : cbEspecialidad.getItems()) {
-                    if (esp.getIdEspecialidad() == newVal.getFkIdEsp()) {
+                for (Especialidades esp : cbEspecialidad.getItems()) {
+                    if (esp.getNombreEspecialidad().equals(newVal.getEspecialidad().getNombreEspecialidad())) {
                         cbEspecialidad.setValue(esp);
                         break;
                     }
@@ -214,15 +218,17 @@ public class CitaController {
             citaDAO.conectar();
             List<Cita> citas = citaDAO.obtenerCitaPorPacienteId(paciente.getIdPaciente());
 
+
             LocalDate hoy = LocalDate.now();
             boolean hayCitaHoy = citas.stream().anyMatch(cita -> {
-                java.sql.Date fechaSqlDate = (java.sql.Date) cita.getFechaCita();
-                return fechaSqlDate != null && fechaSqlDate.toLocalDate().equals(hoy);
+                LocalDate fechaCita = cita.getFechaCita();
+                return fechaCita != null && fechaCita.equals(hoy);
             });
 
             if (hayCitaHoy) {
                 AlertUtils.mostrarInformacion("¡Tienes una cita para hoy!");
             }
+
 
             tvCitasPaciente.setItems(FXCollections.observableArrayList(citas));
             citaDAO.desconectar();
@@ -240,117 +246,7 @@ public class CitaController {
 
 
 
-    @FXML
-    public void nuevaCita() {
 
-        if (paciente == null) {
-            AlertUtils.mostrarError("Introduce DNI de paciente");
-            return;
-        }
-        LocalDate fechaSeleccionada = dpFechaCita.getValue();
-        Especialidad espSeleccionada = cbEspecialidad.getValue();
-        if (fechaSeleccionada == null || espSeleccionada == null) {
-            AlertUtils.mostrarError("Elegir fecha de cita o Especialidad");
-            return;
-        }
-
-        try {
-            citaDAO.conectar();
-            int nuevoId = citaDAO.obtenerSiguienteIdCita();
-
-            Cita nuevaCita = new Cita();
-            nuevaCita.setIdCita(nuevoId);
-            nuevaCita.setFechaCita(Date.valueOf(fechaSeleccionada));
-            nuevaCita.setFkIdEsp(espSeleccionada.getIdEspecialidad());
-            nuevaCita.setFkIdPaciente(paciente.getIdPaciente());
-
-
-            citaDAO.guardarCita(nuevaCita);
-            AlertUtils.mostrarInformacion("Cita creado：" + nuevoId);
-
-
-            verCita();
-            limpiarCajas();
-        } catch (Exception e) {
-            AlertUtils.mostrarError("Error：" + e.getMessage());
-        } finally {
-            try {
-                citaDAO.desconectar();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @FXML
-    public void modificarCita() {
-
-        if (citaSeleccionada == null) {
-            AlertUtils.mostrarError("El seleccionado no existe");
-            return;
-        }
-        LocalDate fechaModificada = dpFechaCita.getValue();
-        Especialidad espModificada = cbEspecialidad.getValue();
-        if (fechaModificada == null || espModificada == null) {
-            AlertUtils.mostrarError("Eliger bien cita y especificada");
-            return;
-        }
-
-        try {
-            citaDAO.conectar();
-
-            Cita citaModificada = new Cita();
-            citaModificada.setIdCita(citaSeleccionada.getIdCita());
-            citaModificada.setFechaCita(Date.valueOf(fechaModificada));
-            citaModificada.setFkIdEsp(espModificada.getIdEspecialidad());
-            citaModificada.setFkIdPaciente(paciente.getIdPaciente());
-
-
-            citaDAO.modificarCita(citaSeleccionada, citaModificada);
-            AlertUtils.mostrarInformacion("Cita actualizada");
-
-
-            verCita();
-            limpiarCajas();
-            citaSeleccionada = null;
-        } catch (Exception e) {
-            AlertUtils.mostrarError("Error：" + e.getMessage());
-        } finally {
-            try {
-                citaDAO.desconectar();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @FXML
-    public void borrarCita() {
-
-        if (citaSeleccionada == null) {
-            AlertUtils.mostrarError("el seleccionado no existe");
-            return;
-        }
-        try {
-            citaDAO.conectar();
-
-            citaDAO.eliminarCita(citaSeleccionada);
-            AlertUtils.mostrarInformacion("Cita eliminada");
-
-
-            verCita();
-            limpiarCajas();
-            citaSeleccionada = null;
-        } catch (Exception e) {
-            AlertUtils.mostrarError("Error：" + e.getMessage());
-        } finally {
-            try {
-                citaDAO.desconectar();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 
     @FXML

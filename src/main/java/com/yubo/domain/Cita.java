@@ -19,34 +19,33 @@ public class Cita implements Serializable {
     @Column(name = "fechaCita")
     private LocalDate fechaCita;
 
-    @Column(name = "nombreEsp")
-    private String nombreEsp;
+    @ManyToOne
+    @JoinColumn(name = "idEspecialidad", referencedColumnName = "idEspecialidad")
+    private Especialidades especialidad;
 
     @ManyToOne
-    @JoinColumn(name="idPaciente",referencedColumnName="idPaciente")
+    @JoinColumn(name = "idPaciente", referencedColumnName = "idPaciente")
     private Paciente paciente;
 
 
     public Cita() {
     }
 
-    public Cita(int idCita, LocalDate fechaCita, String nombreEsp, Paciente paciente) {
+    public Cita(int idCita, LocalDate fechaCita, Especialidades especialidades, Paciente paciente) {
         this.idCita = idCita;
         this.fechaCita = fechaCita;
-        this.nombreEsp = nombreEsp;
+        this.especialidad = especialidades;
         this.paciente = paciente;
     }
-
     @Override
     public String toString() {
         return "Cita{" +
                 "idCita=" + idCita +
                 ", fechaCita=" + fechaCita +
-                ", nombreEsp='" + nombreEsp + '\'' +
+                ", especialidad=" + (especialidad != null ? especialidad.getNombreEspecialidad() : "null") +
                 ", paciente=" + paciente +
                 '}';
     }
-
     public int getIdCita() {
         return idCita;
     }
@@ -64,14 +63,13 @@ public class Cita implements Serializable {
     }
 
 
-    public String getNombreEsp() {
-        return nombreEsp;
+    public Especialidades getEspecialidad() {
+        return especialidad;
     }
 
-    public void setNombreEsp(String nombreEsp) {
-        this.nombreEsp = nombreEsp;
+    public void setEspecialidad(Especialidades especialidad) {
+        this.especialidad = especialidad;
     }
-
 
     public Paciente getPaciente() { return paciente; }
     public void setPaciente(Paciente paciente) { this.paciente = paciente; }

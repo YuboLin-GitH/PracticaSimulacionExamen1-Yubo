@@ -7,7 +7,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "Paciente")
+@Table(name = "Pacientes")
 public class Paciente {
 
     @Id
@@ -24,7 +24,7 @@ public class Paciente {
     @Column(name = "direccion")
     private String direccion;
     @Column(name = "telefono")
-    private int telefono;
+    private String telefono;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<Cita> citas ;
@@ -32,7 +32,7 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String dni, String nombre, String password, String direccion, int telefono) {
+    public Paciente(int idPaciente, String dni, String nombre, String password, String direccion, String telefono) {
         this.idPaciente = idPaciente;
         this.dni = dni;
         this.nombre = nombre;
@@ -81,11 +81,11 @@ public class Paciente {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

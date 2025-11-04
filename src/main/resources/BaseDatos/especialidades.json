@@ -1,52 +1,52 @@
 [
   {
     "idEspecialidad": 1,
-    "nombreEspecilidad": "Cirujía"
+    "nombreEspecialidad": "Cirujía"
 
   },
   {
     "idEspecialidad": 2,
-    "nombreEspecilidad": "Neurología"
+    "nombreEspecialidad": "Neurología"
 
   },
   {
     "idEspecialidad": 3,
-    "nombreEspecilidad": "Nefrología"
+    "nombreEspecialidad": "Nefrología"
 
   },
   {
     "idEspecialidad": 4,
-    "nombreEspecilidad": "Digestivo"
+    "nombreEspecialidad": "Digestivo"
 
   },
   {
     "idEspecialidad": 5,
-    "nombreEspecilidad": "Unidad de dolor"
+    "nombreEspecialidad": "Unidad de dolor"
 
   },
   {
     "idEspecialidad": 6,
-    "nombreEspecilidad": "Neumología"
+    "nombreEspecialidad": "Neumología"
 
   },
   {
     "idEspecialidad": 7,
-    "nombreEspecilidad": "Cardiología"
+    "nombreEspecialidad": "Cardiología"
 
   },
   {
     "idEspecialidad": 8,
-    "nombreEspecilidad": "Pediatría"
+    "nombreEspecialidad": "Pediatría"
 
   },
   {
     "idEspecialidad": 9,
-    "nombreEspecilidad": "Oftalmología"
+    "nombreEspecialidad": "Oftalmología"
 
   },
   {
     "idEspecialidad": 10,
-    "nombreEspecilidad": "Radiología"
+    "nombreEspecialidad": "Radiología"
 
   }
 

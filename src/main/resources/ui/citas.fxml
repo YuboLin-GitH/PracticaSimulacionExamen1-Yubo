@@ -73,7 +73,7 @@
 
             <TextField fx:id="tfNumeroCita" layoutX="320.0" layoutY="288.0" prefHeight="27.0" prefWidth="63.0" />
             <DatePicker fx:id="dpFechaCita" layoutX="307.0" layoutY="343.0" />
-            <ComboBox fx:id="cbEspecialidad" layoutX="308.0" layoutY="399.0" prefWidth="150.0" promptText="Cirugía" />
+            <ComboBox fx:id="cbEspecialidad" layoutX="308.0" layoutY="399.0" prefWidth="150.0" />
 
             <TableView fx:id="tvCitasPaciente" layoutX="68.0" layoutY="517.0" prefHeight="188.0" prefWidth="533.0">
                <columns>
@@ -83,9 +83,9 @@
               </columns>
             </TableView>
             <Button fx:id="btLimbiar" layoutX="43.0" layoutY="741.0" mnemonicParsing="false" onAction="#limpiarCajas" prefHeight="42.0" prefWidth="147.0" style="-fx-background-radius: 35;" text="Limpiar campos citas" />
-            <Button fx:id="btNuevaCita" layoutX="212.0" layoutY="741.0" mnemonicParsing="false" onAction="#nuevaCita" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Nueva Cita" />
-            <Button fx:id="btModificarCita" layoutX="350.0" layoutY="741.0" mnemonicParsing="false" onAction="#modificarCita" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Modificar Cita" />
-            <Button fx:id="btBorrarCita" layoutX="500.0" layoutY="741.0" mnemonicParsing="false" onAction="#borrarCita" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Borrar Cita" />
+            <Button fx:id="btNuevaCita" layoutX="212.0" layoutY="741.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Nueva Cita" />
+            <Button fx:id="btModificarCita" layoutX="350.0" layoutY="741.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Modificar Cita" />
+            <Button fx:id="btBorrarCita" layoutX="500.0" layoutY="741.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Borrar Cita" />
 
          </children>
       </AnchorPane>

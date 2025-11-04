@@ -39,12 +39,12 @@ public class UsuarioDAO {
         p.setNombre(resultado.getString("nombre"));
         p.setPassword(resultado.getString("password"));
         p.setDireccion(resultado.getString("direccion"));
-        p.setTelefono(resultado.getInt("telefono"));
+        p.setTelefono(resultado.getString("telefono"));
         return p;
     }
 
     public Paciente buscarPorDni(String dni) throws SQLException {
-        String sql = "SELECT * FROM paciente WHERE dni = ?";
+        String sql = "SELECT * FROM pacientes WHERE dni = ?";
         try (PreparedStatement sentencia = conexion.prepareStatement(sql)) {
             sentencia.setString(1, dni);
             ResultSet resultado = sentencia.executeQuery();

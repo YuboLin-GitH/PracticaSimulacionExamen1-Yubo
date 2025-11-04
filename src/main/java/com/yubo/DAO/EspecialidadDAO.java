@@ -1,7 +1,7 @@
 package com.yubo.DAO;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yubo.domain.Especialidad;
+import com.yubo.domain.Especialidades;
 
 
 import java.io.File;
@@ -13,12 +13,12 @@ import java.util.List;
 public class EspecialidadDAO {
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
-    public static List<Especialidad> obtenerEspecialidad() throws IOException {
+    public static List<Especialidades> obtenerEspecialidad() throws IOException {
 
-        ArrayList<Especialidad> especialidad =
+        ArrayList<Especialidades> especialidad =
                 JSON_MAPPER.readValue(new File("src/main/resources/BaseDatos/especialidades.json"),
                         JSON_MAPPER.getTypeFactory().constructCollectionType
-                                (ArrayList.class, Especialidad.class));
+                                (ArrayList.class, Especialidades.class));
 
         return especialidad;
     }
