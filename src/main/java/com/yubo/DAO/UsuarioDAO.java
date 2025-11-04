@@ -37,7 +37,7 @@ public class UsuarioDAO {
         p.setIdPaciente(resultado.getInt("idPaciente"));
         p.setDni(resultado.getString("dni"));
         p.setNombre(resultado.getString("nombre"));
-        p.setPassword(resultado.getString("password"));
+        p.setPassword(resultado.getString("pass"));
         p.setDireccion(resultado.getString("direccion"));
         p.setTelefono(resultado.getString("telefono"));
         return p;

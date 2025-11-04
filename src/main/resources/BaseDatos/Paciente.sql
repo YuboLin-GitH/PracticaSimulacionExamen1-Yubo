@@ -4,12 +4,12 @@ Use CentroMedico;
 
 
 CREATE TABLE IF NOT EXISTS Pacientes(
-    idPaciente int unsigned auto_increment NOT NULL primary key,
+    idPaciente int unsigned auto_increment primary key,
     dni varchar(9),
-    nombre varchar(30),
-    password varchar(64),
-    direccion varchar(100),
-    telefono varchar(9)
+    Pass varchar(256),
+    Nombre varchar(100),
+    Direccion varchar(100),
+    Telefono varchar(9)
     )ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 
@@ -22,15 +22,13 @@ CREATE TABLE IF NOT EXISTS Especialidades (
 
 
 INSERT INTO Pacientes  VALUES
-       (1,"12345678A","David",SHA2("david",256),"c/ AAA", 611222333),
-       (2,"34564546B","Angel",SHA2("angel",256),"c/ BBB", 611512183),
-       (3,"62145448C","Lucia",SHA2("lucia",256),"c/ CCC", 611224013),
-       (4,"91321654D","Martina",SHA2("martina",256),"c/ DDD", 618434555),
-       (5,"51248345E","Sofia",SHA2("sofia",256),"c/ EEE", 649161161),
-       (6,"84345876F","Hugo",SHA2("hugo",256), "c/ FFF", 616713488),
-       (7,"81431548G","Leo",SHA2("leo",256),"c/ GGG", 668453178),
-       (8,"11501548H","Daniel",SHA2("daniel",256),"c/ HHH", 691246578);
-
+       (1, "12345678A", SHA2("pass1",256), "Juan Pedro Gutierrez Soriano", "C/Manzana nº1", "123456789"),
+       (2, "23456789B", SHA2("pass2",256), "Pedro García López", "C/Cereza nº2", "234567891"),
+       (3, "34567891C", SHA2("pass3",256), "Juan Gómez Alario", "C/Sandía nº3", "345678912"),
+       (4, "45678912D", SHA2("pass4",256), "María Molinero Sánchez", "C/Melón nº4", "456789123"),
+       (5, "56789123E", SHA2("pass5",256), "Ana Martín López", "C/Plátano nº5", "567891234"),
+       (6, "67891234F", SHA2("pass6",256), "Ángel Hernández García", "C/Pera nº6", "678912345"),
+       (7, "78912345G", SHA2("pass7",256), "Sandra Garrido Gómez", "C/Naranja nº7", "789123456");
 
 
 INSERT INTO Especialidades VALUES
