@@ -83,7 +83,7 @@
               </columns>
             </TableView>
             <Button fx:id="btLimbiar" layoutX="43.0" layoutY="741.0" mnemonicParsing="false" onAction="#limpiarCajas" prefHeight="42.0" prefWidth="147.0" style="-fx-background-radius: 35;" text="Limpiar campos citas" />
-            <Button fx:id="btNuevaCita" layoutX="212.0" layoutY="741.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Nueva Cita" />
+            <Button fx:id="btNuevaCita" layoutX="212.0" layoutY="741.0" mnemonicParsing="false" onAction="#nuevaCita" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Nueva Cita" />
             <Button fx:id="btModificarCita" layoutX="350.0" layoutY="741.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Modificar Cita" />
             <Button fx:id="btBorrarCita" layoutX="500.0" layoutY="741.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" style="-fx-background-radius: 35;" text="Borrar Cita" />
 

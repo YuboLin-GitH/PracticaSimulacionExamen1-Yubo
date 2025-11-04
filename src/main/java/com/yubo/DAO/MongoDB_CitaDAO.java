@@ -17,16 +17,19 @@ import org.bson.Document;
  * @Create 04/11/2025 23:41
  * @Version 1.0
  */
-public class MongoDB_CitaDAO {
+public class MongoDB_CitaDAO implements MongoDB_CitaInterface{
     MongoClient mongoClient;
     MongoDatabase mongoDatabase; // BASE DE DATOS DE MONGO
     MongoCollection<Document> collection;
+
 
     public MongoDB_CitaDAO() {
         mongoClient = MongoDB_ConnectionDB.conectar();
         mongoDatabase = mongoClient.getDatabase("ExamenCitasMedicas");
         collection = mongoDatabase.getCollection("CitasMedicas");
     }
+
+    @Override
     public boolean insertCita(Cita cita) {
         Document doc = new Document(); // DOCUMENTO BSON QUE SE INSERTARA EN LA BD
         try {

@@ -1,5 +1,7 @@
 package com.yubo.DAO;
 
+import com.yubo.domain.Cita;
+
 /**
  * ClassName: MongoDB_CitaInterface
  * Package: com.yubo.DAO
@@ -10,4 +12,9 @@ package com.yubo.DAO;
  * @Version 1.0
  */
 public interface MongoDB_CitaInterface {
+
+
+
+
+    boolean insertCita(Cita cita);
 }

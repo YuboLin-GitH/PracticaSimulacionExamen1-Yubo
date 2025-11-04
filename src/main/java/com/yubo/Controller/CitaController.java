@@ -24,6 +24,7 @@ import java.util.List;
 public class CitaController {
     private final MySQL_PacienteInterface mySQL_PacienteInterface = new MySQL_PacienteDAO();
     private final MySQL_CitaInterface mySQL_CitaInterface = new MySQL_CitaDAO();
+    private final MongoDB_CitaInterface mongoDB_CitaInterface = new MongoDB_CitaDAO();
 
 
     @FXML
@@ -221,8 +222,33 @@ public class CitaController {
         }
     }
 
+    @FXML
+    private  void nuevaCita() {
+        try {
+            Especialidades especialidad = new Especialidades();
+            especialidad.setIdEspecialidad(1);
+
+            Paciente paciente = new Paciente();
+            paciente.setIdPaciente(5);
+
+            Cita cita = new Cita();
+            cita.setFechaCita(java.time.LocalDate.now());
+            cita.setEspecialidad(especialidad);
+            cita.setPaciente(paciente);
+
+            boolean mongoOK = mongoDB_CitaInterface.insertCita(cita);
+            if (mongoOK) {
+                AlertUtils.mostrarInformacion("Cita registrada correctamente en MySQL y MongoDB.");
+            } else {
+                AlertUtils.mostrarInformacion("Cita registrada en MySQL, pero falló al guardarla en MongoDB.");
+            }
 
 
+        }catch (Exception e) {
+            AlertUtils.mostrarError("Error al crear cita: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 
 
