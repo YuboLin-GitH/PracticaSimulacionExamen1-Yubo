@@ -28,7 +28,7 @@ public class CitaController {
 
 
     @FXML
-    public Button btNuevaCita, btBorrarCita, btModificarCita, btVerCita;
+    public Button btNuevaCita, btBorrarCita, btModificarCita, btVerCita, btLimbiar;
 
 
     @FXML

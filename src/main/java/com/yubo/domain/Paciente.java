@@ -1,15 +1,33 @@
 package com.yubo.domain;
 
 
+import javax.persistence.*;
+import java.util.List;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name = "Paciente")
 public class Paciente {
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "idPaciente")
     private int idPaciente;
+
+    @Column(name = "dni")
     private String dni;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "password")
     private String password;
+    @Column(name = "direccion")
     private String direccion;
+    @Column(name = "telefono")
     private int telefono;
 
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+    private List<Cita> citas ;
 
     public Paciente() {
     }
@@ -82,5 +100,13 @@ public class Paciente {
                 ", direccion='" + direccion + '\'' +
                 ", telefono=" + telefono +
                 '}';
+    }
+
+    public List<Cita> getCitas() {
+        return citas;
+    }
+
+    public void setCitas(List<Cita> citas) {
+        this.citas = citas;
     }
 }

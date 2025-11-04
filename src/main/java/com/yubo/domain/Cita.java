@@ -1,24 +1,50 @@
 package com.yubo.domain;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 
-public class Cita  {
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name = "Cita")
+public class Cita implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "idCita")
     private int idCita;
-    private Date fechaCita;
-    private int fkIdPaciente;
-    private int fkIdEsp;
+
+    @Column(name = "fechaCita")
+    private LocalDate fechaCita;
+
+    @Column(name = "nombreEsp")
     private String nombreEsp;
+
+    @ManyToOne
+    @JoinColumn(name="idPaciente",referencedColumnName="idPaciente")
+    private Paciente paciente;
+
 
     public Cita() {
     }
 
-    public Cita(int idCita, Date fechaCita, int fkIdPaciente, int fkIdEsp, String nombreEsp) {
+    public Cita(int idCita, LocalDate fechaCita, String nombreEsp, Paciente paciente) {
         this.idCita = idCita;
         this.fechaCita = fechaCita;
-        this.fkIdPaciente = fkIdPaciente;
-        this.fkIdEsp = fkIdEsp;
         this.nombreEsp = nombreEsp;
+        this.paciente = paciente;
+    }
+
+    @Override
+    public String toString() {
+        return "Cita{" +
+                "idCita=" + idCita +
+                ", fechaCita=" + fechaCita +
+                ", nombreEsp='" + nombreEsp + '\'' +
+                ", paciente=" + paciente +
+                '}';
     }
 
     public int getIdCita() {
@@ -29,29 +55,14 @@ public class Cita  {
         this.idCita = idCita;
     }
 
-    public Date getFechaCita() {
+    public LocalDate getFechaCita() {
         return fechaCita;
     }
 
-    public void setFechaCita(Date fechaCita) {
+    public void setFechaCita(LocalDate fechaCita) {
         this.fechaCita = fechaCita;
     }
 
-    public int getFkIdPaciente() {
-        return fkIdPaciente;
-    }
-
-    public void setFkIdPaciente(int fkIdPaciente) {
-        this.fkIdPaciente = fkIdPaciente;
-    }
-
-    public int getFkIdEsp() {
-        return fkIdEsp;
-    }
-
-    public void setFkIdEsp(int fkIdEsp) {
-        this.fkIdEsp = fkIdEsp;
-    }
 
     public String getNombreEsp() {
         return nombreEsp;
@@ -61,14 +72,7 @@ public class Cita  {
         this.nombreEsp = nombreEsp;
     }
 
-    @Override
-    public String toString() {
-        return "Cita{" +
-                "idCita=" + idCita +
-                ", fechaCita=" + fechaCita +
-                ", fkIdPaciente=" + fkIdPaciente +
-                ", fkIdEsp=" + fkIdEsp +
-                ", nombreEsp='" + nombreEsp + '\'' +
-                '}';
-    }
+
+    public Paciente getPaciente() { return paciente; }
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
 }
