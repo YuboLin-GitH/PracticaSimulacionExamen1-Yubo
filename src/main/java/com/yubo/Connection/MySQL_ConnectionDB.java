@@ -15,7 +15,7 @@ public class MySQL_ConnectionDB {
     public static Connection conectar() {
         try {
             Properties properties = new Properties();
-            properties.load(R.getProperties("database.properties"));
+            properties.load(R.getProperties("MySQL_Database.properties"));
 
             String host = properties.getProperty("host");
             String port = properties.getProperty("port");
