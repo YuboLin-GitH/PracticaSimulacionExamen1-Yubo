@@ -214,7 +214,6 @@ public class CitaController {
             citaDAO.conectar();
             List<Cita> citas = citaDAO.obtenerCitaPorPacienteId(paciente.getIdPaciente());
 
-
             LocalDate hoy = LocalDate.now();
             boolean hayCitaHoy = citas.stream().anyMatch(cita -> {
                 java.sql.Date fechaSqlDate = (java.sql.Date) cita.getFechaCita();
@@ -224,8 +223,6 @@ public class CitaController {
             if (hayCitaHoy) {
                 AlertUtils.mostrarInformacion("¡Tienes una cita para hoy!");
             }
-
-
 
             tvCitasPaciente.setItems(FXCollections.observableArrayList(citas));
             citaDAO.desconectar();
@@ -239,6 +236,7 @@ public class CitaController {
             e.printStackTrace();
         }
     }
+
 
 
 
@@ -355,8 +353,8 @@ public class CitaController {
     }
 
 
-
-    private void limpiarCajas() {
+    @FXML
+    public void limpiarCajas() {
         tfNumeroCita.clear();
         dpFechaCita.setValue(null);
         cbEspecialidad.setValue(null);
