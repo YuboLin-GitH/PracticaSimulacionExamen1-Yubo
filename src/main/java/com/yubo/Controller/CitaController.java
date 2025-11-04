@@ -1,9 +1,7 @@
 package com.yubo.Controller;
 
 
-import com.yubo.DAO.CitaDAO;
-import com.yubo.DAO.EspecialidadDAO;
-import com.yubo.DAO.UsuarioDAO;
+import com.yubo.DAO.*;
 import com.yubo.domain.Cita;
 import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
@@ -24,6 +22,10 @@ import java.util.List;
 
 
 public class CitaController {
+    private final MySQL_PacienteInterface mySQL_PacienteInterface = new MySQL_PacienteDAO();
+    private final MySQL_CitaInterface mySQL_CitaInterface = new MySQL_CitaDAO();
+
+
     @FXML
     public TextField tfTelefono, tfNombre, tfDireccion, tfDNI, tfNumeroCita;
 
@@ -48,28 +50,13 @@ public class CitaController {
     private TableColumn<Cita, String> colEspecialidad;
 
 
-    private final CitaDAO citaDAO ;
     private Paciente paciente;
 
     private Cita citaSeleccionada;
 
-
-
     public CitaController() {
-        citaDAO = new CitaDAO();
-
-        try {
-            citaDAO.conectar();
-        } catch (SQLException sqle) {
-            AlertUtils.mostrarError("Error al conectar con la base de datos");
-        } catch (ClassNotFoundException cnfe) {
-            AlertUtils.mostrarError("Error al iniciar la aplicación");
-        } catch (IOException ioe) {
-            AlertUtils.mostrarError("Error al cargar la configuración");
-        }
-
-        System.out.println(System.getProperty("user.home"));
     }
+
 
     @FXML
     public void initialize() {
@@ -170,10 +157,8 @@ public class CitaController {
             }
 
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.conectar();
-            Paciente nuevoPaciente = usuarioDAO.buscarPorDni(dniIngresado);
-            usuarioDAO.desconectar();
+            Paciente nuevoPaciente = mySQL_PacienteInterface.buscarPorDni(dniIngresado);
+
 
             if (nuevoPaciente == null) {
                 AlertUtils.mostrarError("No se encontró paciente con ese DNI");
@@ -204,10 +189,8 @@ public class CitaController {
             }
 
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.conectar();
-            Paciente nuevoPaciente = usuarioDAO.buscarPorDni(dniIngresado);
-            usuarioDAO.desconectar();
+            Paciente nuevoPaciente = mySQL_PacienteInterface.buscarPorDni(dniIngresado);
+
 
             if (nuevoPaciente == null) {
                 AlertUtils.mostrarError("No se encontró paciente con ese DNI");
@@ -215,8 +198,7 @@ public class CitaController {
             }
 
 
-            citaDAO.conectar();
-            List<Cita> citas = citaDAO.obtenerCitaPorPacienteId(paciente.getIdPaciente());
+            List<Cita> citas = mySQL_CitaInterface.obtenerCitaPorPacienteId(paciente.getIdPaciente());
 
 
             LocalDate hoy = LocalDate.now();
@@ -231,10 +213,6 @@ public class CitaController {
 
 
             tvCitasPaciente.setItems(FXCollections.observableArrayList(citas));
-            citaDAO.desconectar();
-
-
-
 
 
         } catch (Exception e) {
