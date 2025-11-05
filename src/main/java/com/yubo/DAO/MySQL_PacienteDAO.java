@@ -2,12 +2,9 @@ package com.yubo.DAO;
 
 import com.yubo.Connection.MySQL_ConnectionDB;
 import com.yubo.domain.Paciente;
-import com.yubo.util.R;
 
 
-import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 
 public class MySQL_PacienteDAO implements MySQL_PacienteInterface {
@@ -20,7 +17,7 @@ public class MySQL_PacienteDAO implements MySQL_PacienteInterface {
         p.setIdPaciente(resultado.getInt("idPaciente"));
         p.setDni(resultado.getString("dni"));
         p.setNombre(resultado.getString("nombre"));
-        p.setPassword(resultado.getString("pass"));
+        p.setPass(resultado.getString("pass"));
         p.setDireccion(resultado.getString("direccion"));
         p.setTelefono(resultado.getString("telefono"));
         return p;

@@ -19,8 +19,8 @@ public class Paciente {
     private String dni;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "password")
-    private String password;
+    @Column(name = "pass")
+    private String pass;
     @Column(name = "direccion")
     private String direccion;
     @Column(name = "telefono")
@@ -32,11 +32,11 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String dni, String nombre, String password, String direccion, String telefono) {
+    public Paciente(int idPaciente, String dni, String nombre, String pass, String direccion, String telefono) {
         this.idPaciente = idPaciente;
         this.dni = dni;
         this.nombre = nombre;
-        this.password = password;
+        this.pass = pass;
         this.direccion = direccion;
         this.telefono = telefono;
     }
@@ -65,12 +65,12 @@ public class Paciente {
         this.nombre = nombre;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPass() {
+        return pass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getDireccion() {
@@ -96,7 +96,7 @@ public class Paciente {
                 "idPaciente=" + idPaciente +
                 ", dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + pass + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", telefono=" + telefono +
                 '}';

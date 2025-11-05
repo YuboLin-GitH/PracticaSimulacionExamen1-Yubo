@@ -18,6 +18,7 @@ import org.hibernate.Session;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -148,6 +149,24 @@ public class CitaController {
         });
     }
 
+    public void cargarDatos() {
+        //modoEdicion(false);
+        tvCitasPaciente.getItems().clear();
+
+        try (Session session = HibernateUtil.getSession()){
+            List<Citas> citas= hibernateCitaInterface.listarCita(session);
+            List<Citas> estePaciente = new ArrayList<>();
+
+            for (Citas c : citas) {
+                if (c.getPaciente() != null && c.getPaciente().getIdPaciente() == paciente.getIdPaciente()) {
+                    estePaciente.add(c);
+                }
+            }
+
+            tvCitasPaciente.setItems(FXCollections.observableList(estePaciente));
+        }
+    }
+
 
     @FXML
     public  void verPaciente(){
@@ -240,20 +259,12 @@ public class CitaController {
             c.setEspecialidad(espSeleccionada);
             c.setPaciente(paciente);
 
-
-            /*
-            Especialidades especialidad = new Especialidades();
-            especialidad.setIdEspecialidad(1);
-
-            Paciente paciente = new Paciente();
-            paciente.setIdPaciente(5);
-            */
             try(Session session = HibernateUtil.getSession()) {
 
                 hibernateCitaInterface.insertarCita(session, c);
 
                 AlertUtils.mostrarInformacion("Cita insertada correctamente");
-               verCita();
+                cargarDatos();
                 limpiarCajas();
 
             }catch (Exception e){
@@ -300,7 +311,7 @@ public class CitaController {
             AlertUtils.mostrarInformacion("Cita actualizada");
 
 
-            verCita();
+            cargarDatos();
             limpiarCajas();
             citaSeleccionada = null;
         } catch (Exception e) {
@@ -322,7 +333,7 @@ public class CitaController {
             AlertUtils.mostrarInformacion("Cita eliminada");
 
 
-            verCita();
+            cargarDatos();
             limpiarCajas();
             citaSeleccionada = null;
         } catch (Exception e) {
