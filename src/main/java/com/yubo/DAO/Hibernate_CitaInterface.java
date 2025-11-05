@@ -1,13 +1,13 @@
 package com.yubo.DAO;
 
-import com.yubo.domain.Cita;
+import com.yubo.domain.Citas;
 import org.hibernate.Session;
 
 import java.util.List;
 
 public interface Hibernate_CitaInterface {
-    void insertarCita(Session session, Cita c);
+    void insertarCita(Session session, Citas c);
 
 
-    List<Cita> listarCita(Session session);
+    List<Citas> listarCita(Session session);
 }

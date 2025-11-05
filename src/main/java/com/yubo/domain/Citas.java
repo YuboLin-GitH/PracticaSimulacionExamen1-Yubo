@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "Cita")
-public class Cita implements Serializable {
+@Table(name = "Citas")
+public class Citas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -28,10 +28,10 @@ public class Cita implements Serializable {
     private Paciente paciente;
 
 
-    public Cita() {
+    public Citas() {
     }
 
-    public Cita(int idCita, LocalDate fechaCita, Especialidades especialidades, Paciente paciente) {
+    public Citas(int idCita, LocalDate fechaCita, Especialidades especialidades, Paciente paciente) {
         this.idCita = idCita;
         this.fechaCita = fechaCita;
         this.especialidad = especialidades;

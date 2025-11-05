@@ -11,7 +11,7 @@
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.show_sql">true</property>
 
-        <mapping class="com.yubo.domain.Cita"/>
+        <mapping class="com.yubo.domain.Citas"/>
         <mapping class="com.yubo.domain.Paciente"/>
         <mapping class="com.yubo.domain.Especialidades"/>
     </session-factory>

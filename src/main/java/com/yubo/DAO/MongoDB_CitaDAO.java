@@ -4,7 +4,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.yubo.Connection.MongoDB_ConnectionDB;
-import com.yubo.domain.Cita;
+import com.yubo.domain.Citas;
 import com.yubo.util.AlertUtils;
 import org.bson.Document;
 
@@ -30,7 +30,7 @@ public class MongoDB_CitaDAO implements MongoDB_CitaInterface{
     }
 
     @Override
-    public boolean insertCita(Cita cita) {
+    public boolean insertCita(Citas cita) {
         Document doc = new Document(); // DOCUMENTO BSON QUE SE INSERTARA EN LA BD
         try {
             doc.append("idCita", cita.getIdCita())

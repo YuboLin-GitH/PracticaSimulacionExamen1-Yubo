@@ -1,14 +1,14 @@
 package com.yubo.DAO;
 
 
-import com.yubo.domain.Cita;
+import com.yubo.domain.Citas;
 import org.hibernate.Session;
 
 import java.util.List;
 
 public class Hibernate_CitaDAO implements Hibernate_CitaInterface {
     @Override
-    public void insertarCita(Session session, Cita c)
+    public void insertarCita(Session session, Citas c)
     {
         session.beginTransaction();
         session.save(c);
@@ -18,9 +18,9 @@ public class Hibernate_CitaDAO implements Hibernate_CitaInterface {
 
 
     @Override
-    public List<Cita> listarCita(Session session)
+    public List<Citas> listarCita(Session session)
     {
-        List<Cita> lista = session.createQuery("from Cita ", Cita.class).list();
+        List<Citas> lista = session.createQuery("from Cita ", Citas.class).list();
         return lista;
 
         //list.forEach(System.out::println);//version 1.8 de java

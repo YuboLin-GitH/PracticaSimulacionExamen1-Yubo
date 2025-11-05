@@ -1,8 +1,7 @@
 package com.yubo.DAO;
 
-import com.yubo.domain.Cita;
+import com.yubo.domain.Citas;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,5 +16,5 @@ import java.util.List;
  */
 public interface MySQL_CitaInterface {
 
-    List<Cita> obtenerCitaPorPacienteId(int pacienteId) throws SQLException;
+    List<Citas> obtenerCitaPorPacienteId(int pacienteId) throws SQLException;
 }

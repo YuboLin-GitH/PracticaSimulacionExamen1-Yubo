@@ -1,7 +1,7 @@
 package com.yubo.DAO;
 
 import com.yubo.Connection.MySQL_ConnectionDB;
-import com.yubo.domain.Cita;
+import com.yubo.domain.Citas;
 import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
 
@@ -14,8 +14,8 @@ public class MySQL_CitaDAO implements MySQL_CitaInterface {
 
 
     @Override
-    public List<Cita> obtenerCitaPorPacienteId(int pacienteId) throws SQLException {
-        List<Cita> citas = new ArrayList<>();
+    public List<Citas> obtenerCitaPorPacienteId(int pacienteId) throws SQLException {
+        List<Citas> citas = new ArrayList<>();
         String sql = "SELECT c.idCita, c.fechaCita, e.idEspecialidad, e.nombreEspecialidad, c.idPaciente " +
                 "FROM Citas c JOIN Especialidades e ON c.idEspecialidad = e.idEspecialidad WHERE c.idPaciente = ?";
 
@@ -26,7 +26,7 @@ public class MySQL_CitaDAO implements MySQL_CitaInterface {
             ResultSet rs = sentencia.executeQuery();
 
             while (rs.next()) {
-                Cita cita = new Cita();
+                Citas cita = new Citas();
                 cita.setIdCita(rs.getInt("idCita"));
                 cita.setFechaCita(rs.getDate("fechaCita").toLocalDate());
 

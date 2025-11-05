@@ -16,7 +16,7 @@ public class Especialidades {
     private String nombreEspecialidad;
 
     @OneToMany(mappedBy = "especialidad", cascade = CascadeType.ALL)
-    private List<Cita> citas;
+    private List<Citas> citas;
 
 
     public Especialidades() {
@@ -44,11 +44,11 @@ public class Especialidades {
         this.nombreEspecialidad = nombreEspecialidad;
     }
 
-    public List<Cita> getCitas() {
+    public List<Citas> getCitas() {
         return citas;
     }
 
-    public void setCitas(List<Cita> citas) {
+    public void setCitas(List<Citas> citas) {
         this.citas = citas;
     }
 

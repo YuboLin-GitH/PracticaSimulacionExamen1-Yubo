@@ -27,7 +27,7 @@ public class Paciente {
     private String telefono;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
-    private List<Cita> citas ;
+    private List<Citas> citas ;
 
     public Paciente() {
     }
@@ -102,11 +102,11 @@ public class Paciente {
                 '}';
     }
 
-    public List<Cita> getCitas() {
+    public List<Citas> getCitas() {
         return citas;
     }
 
-    public void setCitas(List<Cita> citas) {
+    public void setCitas(List<Citas> citas) {
         this.citas = citas;
     }
 }

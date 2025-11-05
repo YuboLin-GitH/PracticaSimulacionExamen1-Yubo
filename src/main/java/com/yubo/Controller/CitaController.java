@@ -2,7 +2,7 @@ package com.yubo.Controller;
 
 
 import com.yubo.DAO.*;
-import com.yubo.domain.Cita;
+import com.yubo.domain.Citas;
 import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
 import com.yubo.util.AlertUtils;
@@ -16,9 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.hibernate.Session;
 
-import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -45,18 +43,18 @@ public class CitaController {
     public ComboBox<Especialidades> cbEspecialidad;
 
     @FXML
-    public TableView<Cita> tvCitasPaciente;
+    public TableView<Citas> tvCitasPaciente;
     @FXML
-    private TableColumn<Cita, Integer> colIdCita;
+    private TableColumn<Citas, Integer> colIdCita;
     @FXML
-    private TableColumn<Cita, Date> colFecha;
+    private TableColumn<Citas, Date> colFecha;
     @FXML
-    private TableColumn<Cita, String> colEspecialidad;
+    private TableColumn<Citas, String> colEspecialidad;
 
 
     private Paciente paciente;
 
-    private Cita citaSeleccionada;
+    private Citas citaSeleccionada;
 
     public CitaController() {
     }
@@ -202,7 +200,7 @@ public class CitaController {
             }
 
 
-            List<Cita> citas = mySQL_CitaInterface.obtenerCitaPorPacienteId(paciente.getIdPaciente());
+            List<Citas> citas = mySQL_CitaInterface.obtenerCitaPorPacienteId(paciente.getIdPaciente());
 
 
             LocalDate hoy = LocalDate.now();
@@ -236,8 +234,8 @@ public class CitaController {
                 AlertUtils.mostrarError("Elegir fecha de cita o Especialidad");
                 return;
             }
-            Cita c = new Cita();
-            c.setIdCita();
+            Citas c = new Citas();
+
             c.setFechaCita(fechaSeleccionada);
             c.setEspecialidad(espSeleccionada);
             c.setPaciente(paciente);

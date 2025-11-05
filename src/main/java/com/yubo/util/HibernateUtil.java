@@ -1,7 +1,7 @@
 package com.yubo.util;
 
 
-import com.yubo.domain.Cita;
+import com.yubo.domain.Citas;
 import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
 import org.hibernate.Session;
@@ -27,7 +27,7 @@ public class HibernateUtil {
 		Configuration cfg = new Configuration();
 		cfg.configure("configuration/hibernate.cfg.xml");
 
-		cfg.addAnnotatedClass(Cita.class);
+		cfg.addAnnotatedClass(Citas.class);
         cfg.addAnnotatedClass(Paciente.class);
         cfg.addAnnotatedClass(Especialidades.class);
 
