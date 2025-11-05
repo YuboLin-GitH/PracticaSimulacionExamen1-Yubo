@@ -253,7 +253,7 @@ public class CitaController {
                 hibernateCitaInterface.insertarCita(session, c);
 
                 AlertUtils.mostrarInformacion("Cita insertada correctamente");
-               // cargarDatos();
+               verCita();
                 limpiarCajas();
 
             }catch (Exception e){
@@ -275,6 +275,61 @@ public class CitaController {
     }
 
 
+    @FXML
+    private void modificarCita(){
+        if (citaSeleccionada == null) {
+            AlertUtils.mostrarError("El seleccionado no existe");
+            return;
+        }
+        LocalDate fechaModificada = dpFechaCita.getValue();
+        Especialidades espModificada = cbEspecialidad.getValue();
+        if (fechaModificada == null || espModificada == null) {
+            AlertUtils.mostrarError("Eliger bien cita y especificada");
+            return;
+        }
+        try (Session session = HibernateUtil.getSession()) {
+
+
+            citaSeleccionada.setIdCita(citaSeleccionada.getIdCita());
+            citaSeleccionada.setFechaCita(fechaModificada);
+            citaSeleccionada.setEspecialidad(espModificada);
+            citaSeleccionada.setPaciente(paciente);
+
+
+            hibernateCitaInterface.modificarCita(session,citaSeleccionada);
+            AlertUtils.mostrarInformacion("Cita actualizada");
+
+
+            verCita();
+            limpiarCajas();
+            citaSeleccionada = null;
+        } catch (Exception e) {
+            AlertUtils.mostrarError("Error：" + e.getMessage());
+
+        }
+    }
+
+    @FXML
+    private void borrarCita(){
+        if (citaSeleccionada == null) {
+            AlertUtils.mostrarError("el seleccionado no existe");
+            return;
+        }
+        try (Session session = HibernateUtil.getSession()){
+
+
+            hibernateCitaInterface.borrarCita(session,citaSeleccionada);
+            AlertUtils.mostrarInformacion("Cita eliminada");
+
+
+            verCita();
+            limpiarCajas();
+            citaSeleccionada = null;
+        } catch (Exception e) {
+            AlertUtils.mostrarError("Error：" + e.getMessage());
+        }
+
+    }
 
 
     @FXML
