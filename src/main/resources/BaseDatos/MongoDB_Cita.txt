@@ -1,0 +1,46 @@
+db.CitasMedicas.insertMany(
+[
+  {
+    idCita: 1,
+    fechaCita: '2025-11-12',
+    idEspecialidad: 1,
+    idPaciente : 1
+  },
+  {
+    idCita: 2,
+    fechaCita: '2025-11-13',
+    idEspecialidad: 5,
+    idPaciente : 1
+  },
+  {
+    idCita: 3,
+    fechaCita: '2025-11-14',
+    idEspecialidad: 7,
+    idPaciente : 2
+  },
+  {
+    idCita: 4,
+    fechaCita: '2025-11-20',
+    idEspecialidad: 4,
+    idPaciente : 3
+  },
+  {
+    idCita: 5,
+    fechaCita: '2025-11-22',
+    idEspecialidad: 2,
+    idPaciente : 3
+  },
+  {
+    idCita: 6,
+    fechaCita: '2025-11-23',
+    idEspecialidad: 9,
+    idPaciente : 3
+  },
+  {
+    idCita: 7,
+    fechaCita: '2025-11-22',
+    idEspecialidad: 6,
+    idPaciente : 4
+  }
+]
+)

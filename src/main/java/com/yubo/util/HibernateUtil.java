@@ -2,6 +2,7 @@ package com.yubo.util;
 
 
 import com.yubo.domain.Cita;
+import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,6 +29,7 @@ public class HibernateUtil {
 
 		cfg.addAnnotatedClass(Cita.class);
         cfg.addAnnotatedClass(Paciente.class);
+        cfg.addAnnotatedClass(Especialidades.class);
 
 		factory = cfg.buildSessionFactory();
 	}

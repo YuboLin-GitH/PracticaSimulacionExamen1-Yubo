@@ -6,6 +6,7 @@ import com.yubo.domain.Cita;
 import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
 import com.yubo.util.AlertUtils;
+import com.yubo.util.HibernateUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.hibernate.Session;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -25,6 +27,7 @@ public class CitaController {
     private final MySQL_PacienteInterface mySQL_PacienteInterface = new MySQL_PacienteDAO();
     private final MySQL_CitaInterface mySQL_CitaInterface = new MySQL_CitaDAO();
     private final MongoDB_CitaInterface mongoDB_CitaInterface = new MongoDB_CitaDAO();
+    private final Hibernate_CitaInterface hibernateCitaInterface = new Hibernate_CitaDAO();
 
 
     @FXML
@@ -225,18 +228,41 @@ public class CitaController {
     @FXML
     private  void nuevaCita() {
         try {
+
+            LocalDate fechaSeleccionada = dpFechaCita.getValue();
+            Especialidades espSeleccionada = cbEspecialidad.getValue();
+
+            if (fechaSeleccionada == null || espSeleccionada == null) {
+                AlertUtils.mostrarError("Elegir fecha de cita o Especialidad");
+                return;
+            }
+            Cita c = new Cita();
+            c.setIdCita();
+            c.setFechaCita(fechaSeleccionada);
+            c.setEspecialidad(espSeleccionada);
+            c.setPaciente(paciente);
+
+
+            /*
             Especialidades especialidad = new Especialidades();
             especialidad.setIdEspecialidad(1);
 
             Paciente paciente = new Paciente();
             paciente.setIdPaciente(5);
+            */
+            try(Session session = HibernateUtil.getSession()) {
 
-            Cita cita = new Cita();
-            cita.setFechaCita(java.time.LocalDate.now());
-            cita.setEspecialidad(especialidad);
-            cita.setPaciente(paciente);
+                hibernateCitaInterface.insertarCita(session, c);
 
-            boolean mongoOK = mongoDB_CitaInterface.insertCita(cita);
+                AlertUtils.mostrarInformacion("Cita insertada correctamente");
+               // cargarDatos();
+                limpiarCajas();
+
+            }catch (Exception e){
+                System.out.println("Error de Insertar Cita");
+            }
+
+            boolean mongoOK = mongoDB_CitaInterface.insertCita(c);
             if (mongoOK) {
                 AlertUtils.mostrarInformacion("Cita registrada correctamente en MySQL y MongoDB.");
             } else {

@@ -13,5 +13,6 @@
 
         <mapping class="com.yubo.domain.Cita"/>
         <mapping class="com.yubo.domain.Paciente"/>
+        <mapping class="com.yubo.domain.Especialidades"/>
     </session-factory>
 </hibernate-configuration>
