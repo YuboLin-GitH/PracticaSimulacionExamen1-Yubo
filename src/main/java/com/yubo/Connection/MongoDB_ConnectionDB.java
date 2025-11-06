@@ -28,7 +28,7 @@ public class MongoDB_ConnectionDB {
             username = String.valueOf(properties.get("user"));
             password = String.valueOf(properties.get("password"));
             mongoClient = new MongoClient(new MongoClientURI("mongodb://" + username + ":" + password + "@" + host + ":" + port + "/?authSource=admin"));
-            database =mongoClient.getDatabase("ExamenEquipos");
+            database =mongoClient.getDatabase("ExamenCitasMedicas");
             return mongoClient;
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block

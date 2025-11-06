@@ -7,15 +7,22 @@ import com.yubo.domain.Especialidades;
 import com.yubo.domain.Paciente;
 import com.yubo.util.AlertUtils;
 import com.yubo.util.HibernateUtil;
+import com.yubo.util.R;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -350,5 +357,25 @@ public class CitaController {
         cbEspecialidad.setValue(null);
     }
 
+
+
+    @FXML
+    private void nuevaPaciente() {
+        try {
+            // CARGAR EL ARCHIVO FXML
+            FXMLLoader fxmlLoader = new FXMLLoader(R.getUI("pacientes.fxml"));
+            Parent root = fxmlLoader.load();
+
+
+            // OBTENER EL STAGE ACTUAL A PARTIR DEL BOTON QUE SE HA CLICADO
+            Stage nuevoStage = new Stage();
+            nuevoStage.setTitle("Añadir Paciente");
+            nuevoStage.setScene(new Scene(root));
+            nuevoStage.initModality(Modality.APPLICATION_MODAL);
+            nuevoStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace(); // SI HAY ERROR EN LA CARGA DEL FXML, SE LANZA LA EXCEPCION
+        }
+    }
 }
  
