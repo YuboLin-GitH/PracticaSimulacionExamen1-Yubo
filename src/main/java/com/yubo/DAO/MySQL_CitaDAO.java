@@ -42,7 +42,6 @@ public class MySQL_CitaDAO implements MySQL_CitaInterface {
                 citas.add(cita);
             }
         }
-        // 这里不用手动close，try-with-resources会自动关闭
         return citas;
     }
 
