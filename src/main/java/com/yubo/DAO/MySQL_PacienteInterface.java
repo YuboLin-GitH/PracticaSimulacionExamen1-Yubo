@@ -21,4 +21,5 @@ public interface MySQL_PacienteInterface {
 
     Paciente buscarPorDni(String dni) throws SQLException;
 
+    void crearPaciente(Paciente paciente) throws SQLException;
 }

@@ -39,6 +39,22 @@ public class MySQL_PacienteDAO implements MySQL_PacienteInterface {
         return null;
     }
 
+    @Override
+    public void crearPaciente(Paciente paciente) throws SQLException {
+        String sql = "INSERT INTO pacientes (idPaciente, dni, Pass, Nombre, Direccion, Telefono) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = MySQL_ConnectionDB.conectar();
+             PreparedStatement sentencia = conn.prepareStatement(sql)){
+        sentencia.setInt(1,paciente.getIdPaciente());
+        sentencia.setString(2, paciente.getDni());
+        sentencia.setString(3, paciente.getPass());
+        sentencia.setString(4, paciente.getNombre());
+        sentencia.setString(5, paciente.getDireccion());
+        sentencia.setString(6, paciente.getTelefono());
+        sentencia.executeUpdate();
+
+        }
+    }
+
 
 
 
