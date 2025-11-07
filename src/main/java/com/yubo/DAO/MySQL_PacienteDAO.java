@@ -2,6 +2,7 @@ package com.yubo.DAO;
 
 import com.yubo.Connection.MySQL_ConnectionDB;
 import com.yubo.domain.Paciente;
+import com.yubo.util.AlertUtils;
 
 
 import java.sql.*;
@@ -41,18 +42,20 @@ public class MySQL_PacienteDAO implements MySQL_PacienteInterface {
 
     @Override
     public void crearPaciente(Paciente paciente) throws SQLException {
-        String sql = "INSERT INTO pacientes (idPaciente, dni, Pass, Nombre, Direccion, Telefono) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = MySQL_ConnectionDB.conectar();
-             PreparedStatement sentencia = conn.prepareStatement(sql)){
-        sentencia.setInt(1,paciente.getIdPaciente());
-        sentencia.setString(2, paciente.getDni());
-        sentencia.setString(3, paciente.getPass());
-        sentencia.setString(4, paciente.getNombre());
-        sentencia.setString(5, paciente.getDireccion());
-        sentencia.setString(6, paciente.getTelefono());
-        sentencia.executeUpdate();
-
+        try {
+            String sql = "INSERT INTO pacientes (dni, pass, nombre, direccion, telefono) VALUES (?, ?, ?, ?, ?)";
+            Connection conn = MySQL_ConnectionDB.conectar();
+            PreparedStatement sentencia = conn.prepareStatement(sql);
+            sentencia.setString(1, paciente.getDni());
+            sentencia.setString(2, paciente.getPass());
+            sentencia.setString(3, paciente.getNombre());
+            sentencia.setString(4, paciente.getDireccion());
+            sentencia.setString(5, paciente.getTelefono());
+            sentencia.executeUpdate();
+        }catch (Exception e) {
+            AlertUtils.mostrarError("Error al crear la paciente");
         }
+
     }
 
 

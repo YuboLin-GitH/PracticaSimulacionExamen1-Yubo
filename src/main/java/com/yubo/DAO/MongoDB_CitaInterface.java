@@ -13,8 +13,5 @@ import com.yubo.domain.Citas;
  */
 public interface MongoDB_CitaInterface {
 
-
-
-
     boolean insertCita(Citas cita);
 }

@@ -261,7 +261,6 @@ public class CitaController {
                 return;
             }
             Citas c = new Citas();
-
             c.setFechaCita(fechaSeleccionada);
             c.setEspecialidad(espSeleccionada);
             c.setPaciente(paciente);
@@ -269,14 +268,13 @@ public class CitaController {
             try(Session session = HibernateUtil.getSession()) {
 
                 hibernateCitaInterface.insertarCita(session, c);
-
-                AlertUtils.mostrarInformacion("Cita insertada correctamente");
                 cargarDatos();
                 limpiarCajas();
 
             }catch (Exception e){
-                System.out.println("Error de Insertar Cita");
+                System.out.println("Error de Insertar Cita en MYSQL");
             }
+
 
             boolean mongoOK = mongoDB_CitaInterface.insertCita(c);
             if (mongoOK) {
