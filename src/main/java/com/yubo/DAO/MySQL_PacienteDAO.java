@@ -51,6 +51,7 @@ public class MySQL_PacienteDAO implements MySQL_PacienteInterface {
             sentencia.setString(3, paciente.getNombre());
             sentencia.setString(4, paciente.getDireccion());
             sentencia.setString(5, paciente.getTelefono());
+            //statement.setBoolean(5, paciente.esHombre());
             sentencia.executeUpdate();
         }catch (Exception e) {
             AlertUtils.mostrarError("Error al crear la paciente");

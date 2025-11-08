@@ -7,7 +7,9 @@ import com.yubo.util.AlertUtils;
 import com.yubo.util.HashUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 import java.nio.Buffer;
 import java.sql.SQLException;
@@ -32,6 +34,8 @@ public class PacienteController {
     @FXML
     public Button btCrearPaciente;
 
+    @FXML
+    private ToggleGroup sancionadoGroup;
 
     public PacienteController() {
     }
@@ -46,6 +50,18 @@ public class PacienteController {
         String nombreIngresado = tfNombre.getText();
         String direccionIngresado = tfDireccion.getText();
         String telefonoIngresado = tfTelefono.getText();
+
+        String seleccionado = ((RadioButton) sancionadoGroup.getSelectedToggle()).getText();
+
+        boolean sancionadoSelect;
+
+        if (seleccionado.equals("Si")) {
+            sancionadoSelect = true;
+        } else {
+            sancionadoSelect = false;
+        } // DAR VALOR A SI ESTA SELECCIONADO EL RADIOBUTTON O NO
+
+
 
         if (dniIngresado.isEmpty()) {
             AlertUtils.mostrarError("El DNI no puede estar vacío.");

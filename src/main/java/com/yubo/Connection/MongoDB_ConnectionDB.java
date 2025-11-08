@@ -5,7 +5,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import com.yubo.util.AlertUtils;
-import javafx.scene.control.Alert;
+import com.yubo.util.R;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ public class MongoDB_ConnectionDB {
         String host = "", port = "", name = "", username = "", password = "";
 
         try {
-            properties.load(new FileInputStream("src/main/resources/Configuration/Mongo_Database.properties"));
+            properties.load(R.getProperties("Mongo_Database.properties"));
             host = String.valueOf(properties.get("host"));
             port = String.valueOf(properties.get("port"));
             name = String.valueOf(properties.get("source"));

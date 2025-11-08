@@ -26,6 +26,11 @@ public class Paciente {
     @Column(name = "telefono")
     private String telefono;
 
+    /*
+    @Column(name = "sancionado")
+    private boolean sancionado;
+    */
+
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<Citas> citas ;
 
