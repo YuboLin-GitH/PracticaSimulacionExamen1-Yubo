@@ -75,7 +75,7 @@
             <DatePicker fx:id="dpFechaCita" layoutX="307.0" layoutY="343.0" />
             <ComboBox fx:id="cbEspecialidad" layoutX="308.0" layoutY="399.0" prefWidth="150.0" />
 
-            <TableView fx:id="tvCitasPaciente" layoutX="68.0" layoutY="517.0" prefHeight="188.0" prefWidth="533.0">
+            <TableView fx:id="tvCitasPaciente" layoutX="68.0" layoutY="517.0" onMouseClicked="#onClickTable" prefHeight="188.0" prefWidth="533.0">
                <columns>
                  <TableColumn fx:id="colIdCita" prefWidth="196.0" text="Nª Cita" />
                  <TableColumn fx:id="colFecha" prefWidth="158.0" text="Fecha" />

@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.hibernate.Session;
@@ -62,7 +63,7 @@ public class CitaController {
 
     private Paciente paciente;
 
-    private Citas citaSeleccionada;
+   // private Citas citaSeleccionada;
 
     public CitaController() {
     }
@@ -85,7 +86,7 @@ public class CitaController {
 
         cargarEspecialidades();
 
-        enlazarSeleccionDeTabla();
+        //enlazarSeleccionDeTabla();
         limpiarCajas();
         tfDNI.setOnKeyPressed(this::manejarEnterParaVerCita);
     }
@@ -117,7 +118,7 @@ public class CitaController {
                 return;
             }
 
-            cbEspecialidad.getItems().addAll(especialidades);
+
             cbEspecialidad.setValue(null);
 
             for (Especialidades esp : especialidades) {
@@ -125,7 +126,7 @@ public class CitaController {
                     break;
             }
 
-
+            cbEspecialidad.getItems().addAll(especialidades);
         } catch (Exception e) {
 
             AlertUtils.mostrarError("Error：" + e.getMessage());
@@ -133,8 +134,30 @@ public class CitaController {
         }
     }
 
+    @FXML
+    void onClickTable(MouseEvent event) {
+        Citas equipoSeleccionado = tvCitasPaciente.getSelectionModel().getSelectedItem(); // OBTENER LOS DATOS DEL EQUIPO SELECCIONADO
+        if (equipoSeleccionado != null) {
+            tfNumeroCita.setText(String.valueOf(equipoSeleccionado.getIdCita()));
+            cbEspecialidad.setValue(equipoSeleccionado.getEspecialidad());
+            dpFechaCita.setValue(equipoSeleccionado.getFechaCita());
 
 
+            /*
+             if (equipoSeleccionado.isSancionado()) {
+                noRD.setSelected(false);
+                siRB.setSelected(true);
+            } else {
+                noRD.setSelected(true);
+                siRB.setSelected(false);
+            }
+             */
+
+
+
+        }
+    }
+/*
     private void enlazarSeleccionDeTabla() {
         tvCitasPaciente.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
@@ -155,7 +178,7 @@ public class CitaController {
             }
         });
     }
-
+*/
     public void cargarDatos() {
         //modoEdicion(false);
         tvCitasPaciente.getItems().clear();
@@ -229,6 +252,13 @@ public class CitaController {
             List<Citas> citas = mySQL_CitaInterface.obtenerCitaPorPacienteId(paciente.getIdPaciente());
 
 
+            if (citas.isEmpty()) {
+                AlertUtils.mostrarInformacion("El paciente no tiene citas registradas.");
+                tvCitasPaciente.getItems().clear();
+                return;
+            }
+
+
             LocalDate hoy = LocalDate.now();
             boolean hayCitaHoy = citas.stream().anyMatch(cita -> {
                 LocalDate fechaCita = cita.getFechaCita();
@@ -241,6 +271,7 @@ public class CitaController {
 
 
             tvCitasPaciente.setItems(FXCollections.observableArrayList(citas));
+
 
 
         } catch (Exception e) {
@@ -293,6 +324,7 @@ public class CitaController {
 
     @FXML
     private void modificarCita(){
+        Citas citaSeleccionada = tvCitasPaciente.getSelectionModel().getSelectedItem();
         if (citaSeleccionada == null) {
             AlertUtils.mostrarError("El seleccionado no existe");
             return;
@@ -327,6 +359,7 @@ public class CitaController {
 
     @FXML
     private void borrarCita(){
+        Citas citaSeleccionada = tvCitasPaciente.getSelectionModel().getSelectedItem();
         if (citaSeleccionada == null) {
             AlertUtils.mostrarError("el seleccionado no existe");
             return;
